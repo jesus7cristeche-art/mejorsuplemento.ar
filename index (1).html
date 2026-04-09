@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MejorSuplemento.ar — Suplementos al mejor precio</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --bg2: #0f0f0f;
+  --bg3: #161616;
+  --card: #121212;
+  --card2: #1a1a1a;
+  --orange: #ff6200;
+  --orange2: #ff8533;
+  --orange-dim: rgba(255,98,0,0.12);
+  --orange-border: rgba(255,98,0,0.28);
+  --text: #efefef;
+  --muted: #777;
+  --muted2: #555;
+  --border: #1f1f1f;
+  --border2: #2a2a2a;
+  --green: #2ecc71;
+  --red: #e74c3c;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(8,8,8,0.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  height:60px;padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:0.04em;}
+.logo span{color:var(--orange);}
+.logo small{color:var(--muted);font-size:.7rem;margin-left:.3rem;}
+.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.nav-link{color:var(--muted);font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--orange);}
+.admin-btn{
+  background:var(--orange-dim);border:1px solid var(--orange-border);
+  color:var(--orange);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;
+  text-transform:uppercase;padding:.45rem 1rem;border-radius:4px;cursor:pointer;
+  transition:background .2s;
+}
+.admin-btn:hover{background:rgba(255,98,0,0.22);}
+
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:60px 5% 0;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-150px;right:-100px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(255,98,0,0.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-inner{max-width:700px;animation:fadeUp .9s ease both;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--orange-dim);border:1px solid var(--orange-border);
+  color:var(--orange2);font-size:.72rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.4rem 1rem;border-radius:999px;margin-bottom:1.8rem;
+}
+.hero-tag i{display:inline-block;width:6px;height:6px;background:var(--orange);border-radius:50%;animation:blink 1.6s infinite;}
+.hero h1{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(3.2rem,7vw,5.8rem);line-height:.92;
+  text-transform:uppercase;letter-spacing:-.01em;margin-bottom:1.6rem;
+}
+.hero h1 em{font-style:normal;color:var(--orange);display:block;}
+.hero-sub{color:var(--muted);font-size:1.05rem;line-height:1.65;max-width:480px;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+
+.btn{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.85rem 2rem;border-radius:5px;cursor:pointer;
+  text-decoration:none;display:inline-block;transition:all .2s;border:none;
+}
+.btn-orange{background:var(--orange);color:#fff;}
+.btn-orange:hover{background:var(--orange2);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border2);}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange);}
+
+.stats{
+  background:var(--bg3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:1.6rem 5%;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap;
+}
+.stat-item{text-align:center;}
+.stat-n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--orange);}
+.stat-l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+
+.section{padding:5rem 5%;}
+.sec-label{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem;}
+.sec-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;line-height:1;}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;}
+
+.cat-tabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+.cat-tab{
+  background:var(--card);border:1px solid var(--border2);
+  color:var(--muted);font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.5rem 1.3rem;border-radius:4px;cursor:pointer;transition:all .2s;
+}
+.cat-tab.active,.cat-tab:hover{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:1.2rem;
+}
+.product-card{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:border-color .25s,transform .25s;position:relative;
+}
+.product-card:hover{border-color:var(--orange-border);transform:translateY(-5px);}
+.product-img-wrap{
+  width:100%;height:210px;background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;position:relative;
+}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.product-card:hover .product-img-wrap img{transform:scale(1.05);}
+.no-img{font-size:4rem;opacity:.25;}
+.prod-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:.28rem .65rem;border-radius:3px;z-index:2;
+}
+.badge-best{background:var(--green);color:#fff;}
+.badge-hot{background:var(--red);color:#fff;}
+.badge-deal{background:var(--orange);color:#fff;}
+.product-body{padding:1.2rem;display:flex;flex-direction:column;gap:.55rem;flex:1;}
+.prod-cat{font-size:.68rem;color:var(--orange);font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+.prod-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.2rem;line-height:1.2;color:var(--text);}
+.prod-desc{font-size:.84rem;color:var(--muted);line-height:1.5;flex:1;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;gap:.5rem;}
+.prod-price{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:var(--text);}
+.prod-price-old{font-size:.85rem;color:var(--muted2);text-decoration:line-through;font-weight:400;margin-left:.3rem;}
+.btn-ml{
+  background:var(--orange);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.58rem 1.1rem;border-radius:4px;text-decoration:none;
+  transition:background .2s;white-space:nowrap;flex-shrink:0;
+}
+.btn-ml:hover{background:var(--orange2);}
+
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--muted);
+}
+.empty-icon{font-size:3rem;margin-bottom:1rem;opacity:.4;}
+.empty-state p{font-size:1rem;margin-bottom:1.5rem;}
+
+/* ADMIN */
+.admin-overlay{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.88);backdrop-filter:blur(6px);
+  align-items:flex-start;justify-content:center;
+  padding:2rem 1rem;overflow-y:auto;
+}
+.admin-overlay.open{display:flex;}
+.admin-panel{
+  background:var(--bg2);border:1px solid var(--border2);border-radius:14px;
+  width:100%;max-width:620px;overflow:hidden;
+  animation:fadeUp .35s ease both;margin:auto;
+}
+.admin-header{
+  background:var(--bg3);border-bottom:1px solid var(--border);
+  padding:1.4rem 1.8rem;display:flex;align-items:center;justify-content:space-between;
+}
+.admin-header h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;text-transform:uppercase;}
+.admin-header h2 span{color:var(--orange);}
+.close-btn{background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;line-height:1;}
+.close-btn:hover{color:var(--text);}
+.admin-body{padding:1.8rem;}
+
+.admin-tabs{display:flex;gap:.5rem;margin-bottom:1.8rem;}
+.admin-tab{
+  flex:1;background:var(--bg3);border:1px solid var(--border);
+  color:var(--muted);font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.6rem;border-radius:4px;cursor:pointer;transition:all .2s;text-align:center;
+}
+.admin-tab.active{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+.admin-section{display:none;}
+.admin-section.active{display:block;}
+
+.form-group{margin-bottom:1.2rem;}
+.form-group label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text);font-family:'Barlow',sans-serif;font-size:.95rem;
+  padding:.75rem 1rem;border-radius:5px;outline:none;transition:border-color .2s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange);}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group select option{background:var(--bg3);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+.img-preview{
+  width:100%;height:130px;background:var(--bg3);border:1px dashed var(--border2);
+  border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-size:2rem;color:var(--muted2);overflow:hidden;margin-top:.6rem;
+}
+.img-preview img{width:100%;height:100%;object-fit:cover;}
+.img-tip{color:var(--muted);font-size:.73rem;margin-top:.4rem;display:block;line-height:1.4;}
+
+.badge-selector{display:flex;gap:.5rem;flex-wrap:wrap;}
+.badge-opt{
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--muted);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:.4rem .9rem;border-radius:3px;cursor:pointer;transition:all .2s;
+}
+.badge-opt.sel-none{border-color:var(--orange);color:var(--orange);}
+.badge-opt.sel-best{background:#1a3d2b;border-color:var(--green);color:var(--green);}
+.badge-opt.sel-hot{background:#3d1a1a;border-color:var(--red);color:var(--red);}
+.badge-opt.sel-deal{background:var(--orange-dim);border-color:var(--orange);color:var(--orange);}
+
+.form-submit{
+  width:100%;background:var(--orange);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;
+  letter-spacing:.1em;text-transform:uppercase;padding:.9rem;
+  border:none;border-radius:5px;cursor:pointer;transition:background .2s;margin-top:.5rem;
+}
+.form-submit:hover{background:var(--orange2);}
+
+.admin-prod-list{display:flex;flex-direction:column;gap:.7rem;max-height:440px;overflow-y:auto;padding-right:.3rem;}
+.admin-prod-item{
+  background:var(--bg3);border:1px solid var(--border);border-radius:7px;
+  padding:.9rem 1rem;display:flex;align-items:center;gap:1rem;
+}
+.admin-prod-thumb{
+  width:50px;height:50px;border-radius:5px;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;overflow:hidden;flex-shrink:0;
+}
+.admin-prod-thumb img{width:100%;height:100%;object-fit:cover;}
+.admin-prod-info{flex:1;min-width:0;}
+.admin-prod-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.admin-prod-meta{font-size:.75rem;color:var(--muted);margin-top:.1rem;}
+.del-btn{
+  background:transparent;border:1px solid var(--border2);
+  color:var(--muted);font-size:.78rem;padding:.35rem .7rem;
+  border-radius:3px;cursor:pointer;transition:all .2s;flex-shrink:0;
+}
+.del-btn:hover{color:var(--red);border-color:var(--red);}
+.no-products-msg{text-align:center;color:var(--muted);padding:2rem;font-size:.9rem;}
+
+.toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:9999;
+  color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.8rem 1.5rem;border-radius:6px;
+  transform:translateY(100px);opacity:0;
+  transition:all .3s ease;pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.ok{background:var(--green);}
+.toast.err{background:var(--red);}
+
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:3rem 5% 2rem;margin-top:2rem;
+}
+.footer-top{display:flex;justify-content:space-between;gap:3rem;flex-wrap:wrap;margin-bottom:2rem;}
+.footer-brand p{color:var(--muted);font-size:.88rem;margin-top:.7rem;max-width:260px;line-height:1.6;}
+.footer-col h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:1rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.footer-col a{color:#555;text-decoration:none;font-size:.88rem;transition:color .2s;}
+.footer-col a:hover{color:var(--orange);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy,.footer-disc{color:#3a3a3a;font-size:.75rem;}
+.footer-disc{max-width:420px;text-align:right;}
+
+.cats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;}
+.cat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s;
+  text-decoration:none;display:block;
+}
+.cat-card:hover{border-color:var(--orange-border);transform:translateY(-4px);}
+.cat-card-img{
+  width:100%;height:140px;background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;font-size:3.5rem;
+}
+.cat-card-body{padding:1rem;}
+.cat-card-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;}
+.cat-card-desc{font-size:.82rem;color:var(--muted);margin-top:.3rem;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:680px){
+  .nav-link{display:none;}
+  .stats{gap:2rem;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-disc{text-align:left;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Mejor<span>Suplemento</span><small>.ar</small></div>
+  <div class="nav-right">
+    <a href="#productos" class="nav-link">Productos</a>
+    <a href="#categorias" class="nav-link">Categorías</a>
+    <button class="admin-btn" onclick="openAdmin()">⚙ Administrar</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag"><i></i>Afiliados MercadoLibre Argentina</div>
+    <h1>Los mejores<em>suplementos</em>al mejor precio</h1>
+    <p class="hero-sub">Seleccionamos y comparamos los mejores suplementos deportivos disponibles en MercadoLibre. Sin filtros, sin publicidad disfrazada.</p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn btn-orange">Ver productos</a>
+      <a href="#categorias" class="btn btn-outline">Explorar categorías</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-item reveal">
+    <div class="stat-n" id="stat-count">0</div>
+    <div class="stat-l">Productos</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-n">4</div>
+    <div class="stat-l">Categorías</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-n">100%</div>
+    <div class="stat-l">Vendedores en ML</div>
+  </div>
+</div>
+
+<section class="section" id="categorias">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-label">Explorar</div>
+      <h2 class="sec-title">Categorías</h2>
+    </div>
+  </div>
+  <div class="cats-grid">
+    <a class="cat-card reveal" href="#productos" onclick="setFilter('Proteína')">
+      <div class="cat-card-img">🥛</div>
+      <div class="cat-card-body">
+        <div class="cat-card-name">Proteínas</div>
+        <div class="cat-card-desc">Whey, caseína, vegana. Para todo objetivo.</div>
+      </div>
+    </a>
+    <a class="cat-card reveal" href="#productos" onclick="setFilter('Creatina')">
+      <div class="cat-card-img">⚡</div>
+      <div class="cat-card-body">
+        <div class="cat-card-name">Creatina</div>
+        <div class="cat-card-desc">El suplemento más respaldado por la ciencia.</div>
+      </div>
+    </a>
+    <a class="cat-card reveal" href="#productos" onclick="setFilter('Pre-entreno')">
+      <div class="cat-card-img">🔥</div>
+      <div class="cat-card-body">
+        <div class="cat-card-name">Pre-entreno</div>
+        <div class="cat-card-desc">Energía y foco para cada sesión.</div>
+      </div>
+    </a>
+    <a class="cat-card reveal" href="#productos" onclick="setFilter('Vitaminas')">
+      <div class="cat-card-img">💊</div>
+      <div class="cat-card-body">
+        <div class="cat-card-name">Vitaminas</div>
+        <div class="cat-card-desc">Salud base para rendir más.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section" id="productos">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-label">Selección</div>
+      <h2 class="sec-title">Productos</h2>
+    </div>
+  </div>
+  <div class="cat-tabs reveal">
+    <button class="cat-tab active" onclick="filterProducts('Todos',this)">Todos</button>
+    <button class="cat-tab" onclick="filterProducts('Proteína',this)">Proteínas</button>
+    <button class="cat-tab" onclick="filterProducts('Creatina',this)">Creatina</button>
+    <button class="cat-tab" onclick="filterProducts('Pre-entreno',this)">Pre-entreno</button>
+    <button class="cat-tab" onclick="filterProducts('Vitaminas',this)">Vitaminas</button>
+  </div>
+  <div class="products-grid" id="products-grid"></div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Mejor<span>Suplemento</span></div>
+      <p>Selección honesta de suplementos deportivos en MercadoLibre Argentina.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Categorías</h4>
+      <ul>
+        <li><a href="#productos" onclick="setFilter('Proteína')">Proteínas</a></li>
+        <li><a href="#productos" onclick="setFilter('Creatina')">Creatina</a></li>
+        <li><a href="#productos" onclick="setFilter('Pre-entreno')">Pre-entreno</a></li>
+        <li><a href="#productos" onclick="setFilter('Vitaminas')">Vitaminas</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">Sobre nosotros</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 MejorSuplemento.ar</p>
+    <p class="footer-disc">Sitio de afiliados de MercadoLibre. Al comprar a través de nuestros links podemos recibir una comisión sin costo adicional para vos.</p>
+  </div>
+</footer>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="admin-overlay" onclick="overlayClick(event)">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>Panel <span>Admin</span></h2>
+      <button class="close-btn" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-tabs">
+        <div class="admin-tab active" onclick="switchTab('add',this)">➕ Agregar producto</div>
+        <div class="admin-tab" onclick="switchTab('list',this)">📋 Mis productos</div>
+      </div>
+
+      <div class="admin-section active" id="tab-add">
+        <div class="form-group">
+          <label>Nombre del producto *</label>
+          <input type="text" id="f-name" placeholder="Ej: Optimum Nutrition Gold Standard Whey 2lb">
+        </div>
+        <div class="form-group">
+          <label>Categoría *</label>
+          <select id="f-cat">
+            <option value="">— Seleccioná —</option>
+            <option>Proteína</option>
+            <option>Creatina</option>
+            <option>Pre-entreno</option>
+            <option>Vitaminas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Descripción corta</label>
+          <textarea id="f-desc" placeholder="Breve descripción del producto y por qué lo recomendás..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Precio actual (ARS) *</label>
+            <input type="text" id="f-price" placeholder="Ej: 45000">
+          </div>
+          <div class="form-group">
+            <label>Precio anterior (opcional)</label>
+            <input type="text" id="f-oldprice" placeholder="Ej: 55000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Link de afiliado MercadoLibre *</label>
+          <input type="url" id="f-link" placeholder="https://mercadolibre.com.ar/...">
+        </div>
+        <div class="form-group">
+          <label>URL de imagen del producto</label>
+          <input type="url" id="f-img" placeholder="https://..." oninput="previewImg(this.value)">
+          <div class="img-preview" id="img-preview"><span>🖼</span></div>
+          <span class="img-tip">Tip: en MercadoLibre, abrí la foto del producto → clic derecho → "Copiar dirección de imagen" y pegala acá.</span>
+        </div>
+        <div class="form-group">
+          <label>Etiqueta destacada</label>
+          <div class="badge-selector">
+            <div class="badge-opt sel-none" data-badge="none" onclick="selectBadge('none',this)">Sin etiqueta</div>
+            <div class="badge-opt" data-badge="best" onclick="selectBadge('best',this)">⭐ El mejor</div>
+            <div class="badge-opt" data-badge="hot" onclick="selectBadge('hot',this)">🔥 Tendencia</div>
+            <div class="badge-opt" data-badge="deal" onclick="selectBadge('deal',this)">💰 Oferta</div>
+          </div>
+        </div>
+        <button class="form-submit" onclick="addProduct()">Agregar producto →</button>
+      </div>
+
+      <div class="admin-section" id="tab-list">
+        <div class="admin-prod-list" id="admin-prod-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let products = JSON.parse(localStorage.getItem('ms_products') || '[]');
+let selectedBadge = 'none';
+let currentFilter = 'Todos';
+
+window.addEventListener('DOMContentLoaded', () => {
+  renderProducts();
+  updateCount();
+  setupReveal();
+});
+
+function save() {
+  localStorage.setItem('ms_products', JSON.stringify(products));
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtPrice(p) {
+  const n = Number(String(p).replace(/\D/g,''));
+  return isNaN(n) ? p : n.toLocaleString('es-AR');
+}
+
+function badgeLabel(b) {
+  return {best:'⭐ El mejor',hot:'🔥 Tendencia',deal:'💰 Oferta'}[b]||'';
+}
+
+function updateCount() {
+  document.getElementById('stat-count').textContent = products.length;
+}
+
+// ─── RENDER ───
+function renderProducts(filter) {
+  if (filter !== undefined) currentFilter = filter;
+  const grid = document.getElementById('products-grid');
+  const list = currentFilter === 'Todos' ? products : products.filter(p => p.cat === currentFilter);
+
+  if (list.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📦</div>
+        <p>${products.length === 0
+          ? 'Todavía no cargaste productos.<br>Hacé clic en <strong>⚙ Administrar</strong> para empezar.'
+          : 'No hay productos en esta categoría todavía.'}</p>
+        <button class="btn btn-orange" onclick="openAdmin()" style="font-size:.85rem;padding:.7rem 1.5rem;margin-top:.5rem;">
+          Agregar producto
+        </button>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(p => `
+    <div class="product-card">
+      <div class="product-img-wrap">
+        ${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.display='none'">` : ''}
+        <span class="no-img" ${p.img ? 'style="display:none"' : ''}>🏋️</span>
+        ${p.badge && p.badge!=='none' ? `<div class="prod-badge badge-${esc(p.badge)}">${badgeLabel(p.badge)}</div>` : ''}
+      </div>
+      <div class="product-body">
+        <div class="prod-cat">${esc(p.cat)}</div>
+        <div class="prod-name">${esc(p.name)}</div>
+        ${p.desc ? `<div class="prod-desc">${esc(p.desc)}</div>` : ''}
+        <div class="prod-footer">
+          <div class="prod-price">
+            $${fmtPrice(p.price)}
+            ${p.oldprice ? `<span class="prod-price-old">$${fmtPrice(p.oldprice)}</span>` : ''}
+          </div>
+          <a href="${esc(p.link)}" target="_blank" rel="nofollow noopener" class="btn-ml">Ver en ML</a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderProducts(cat);
+}
+
+function setFilter(cat) {
+  currentFilter = cat;
+  setTimeout(() => {
+    document.querySelectorAll('.cat-tab').forEach(t => {
+      t.classList.remove('active');
+      if (t.textContent.trim().toLowerCase().startsWith(cat.toLowerCase().replace('í','i').slice(0,4))) {
+        t.classList.add('active');
+      }
+    });
+    renderProducts(cat);
+  }, 300);
+}
+
+// ─── ADMIN ───
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function overlayClick(e) {
+  if (e.target === document.getElementById('admin-overlay')) closeAdmin();
+}
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  if (tab === 'list') renderAdminList();
+}
+
+function addProduct() {
+  const name     = document.getElementById('f-name').value.trim();
+  const cat      = document.getElementById('f-cat').value;
+  const desc     = document.getElementById('f-desc').value.trim();
+  const price    = document.getElementById('f-price').value.trim();
+  const oldprice = document.getElementById('f-oldprice').value.trim();
+  const link     = document.getElementById('f-link').value.trim();
+  const img      = document.getElementById('f-img').value.trim();
+
+  if (!name || !cat || !price || !link) { showToast('Completá los campos obligatorios *', 'err'); return; }
+  if (!link.startsWith('http'))         { showToast('El link debe comenzar con https://', 'err'); return; }
+
+  products.unshift({ id: Date.now(), name, cat, desc, price, oldprice, link, img, badge: selectedBadge });
+  save();
+  renderProducts();
+  updateCount();
+  clearForm();
+  showToast('✓ Producto agregado');
+}
+
+function clearForm() {
+  ['f-name','f-cat','f-desc','f-price','f-oldprice','f-link','f-img'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('img-preview').innerHTML = '<span>🖼</span>';
+  selectedBadge = 'none';
+  document.querySelectorAll('.badge-opt').forEach(b => {
+    b.className = 'badge-opt';
+    if (b.dataset.badge === 'none') b.classList.add('sel-none');
+  });
+}
+
+function deleteProduct(id) {
+  if (!confirm('¿Eliminar este producto?')) return;
+  products = products.filter(p => p.id !== id);
+  save();
+  renderProducts();
+  renderAdminList();
+  updateCount();
+  showToast('Producto eliminado');
+}
+
+function renderAdminList() {
+  const list = document.getElementById('admin-prod-list');
+  if (!products.length) {
+    list.innerHTML = '<div class="no-products-msg">Todavía no cargaste ningún producto.</div>';
+    return;
+  }
+  list.innerHTML = products.map(p => `
+    <div class="admin-prod-item">
+      <div class="admin-prod-thumb">
+        ${p.img ? `<img src="${esc(p.img)}" onerror="this.style.display='none'">` : '🏋️'}
+      </div>
+      <div class="admin-prod-info">
+        <div class="admin-prod-name">${esc(p.name)}</div>
+        <div class="admin-prod-meta">${esc(p.cat)} &middot; $${fmtPrice(p.price)}</div>
+      </div>
+      <button class="del-btn" onclick="deleteProduct(${p.id})">🗑 Eliminar</button>
+    </div>
+  `).join('');
+}
+
+function selectBadge(type, el) {
+  selectedBadge = type;
+  document.querySelectorAll('.badge-opt').forEach(b => {
+    b.className = 'badge-opt';
+  });
+  el.classList.add('sel-' + type);
+}
+
+function previewImg(url) {
+  const wrap = document.getElementById('img-preview');
+  if (!url) { wrap.innerHTML = '<span>🖼</span>'; return; }
+  wrap.innerHTML = `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='<span style=font-size:1rem;color:var(--red)>Imagen no encontrada</span>'">`;
+}
+
+function showToast(msg, type='ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function setupReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+</script>
+</body>
+</html>
